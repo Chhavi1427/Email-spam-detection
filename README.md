@@ -1,7 +1,7 @@
 # Email/SMS Spam Detection
 
 
-[![Email Spam Detection](https://github.com/Chhavi1427/Email-spam-detection/assets/115630286/fcaa528c-8120-4f3e-a201-cc78650ed0ad)](http://localhost:8501/)
+[![Email Spam Detection](https://github.com/Chhavi1427/Email-spam-detection/assets/115630286/fcaa528c-8120-4f3e-a201-cc78650ed0ad)](https://mail-spam-detection.streamlit.app/)
 
 
 This is a simple Spam Classifier web application built using Streamlit and a pre-trained machine learning model. The model is trained to predict whether a given text message is spam or not. It utilizes natural language processing techniques, including text preprocessing, tokenization, and stemming.
