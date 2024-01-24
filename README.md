@@ -111,6 +111,8 @@ streamlit run app.py
 
 **Email:** modichavi1427@gmail.com
 
+**LinkedIn:** https://www.linkedin.com/in/chhavi-modi-079518227
+
 ## Acknowledgements
 
  - The project utilizes the NLTK library for natural language processing.
