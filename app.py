@@ -39,7 +39,7 @@ model = pickle.load(open('model .pkl', 'rb'))
 
 st.title('Email Spam Classifier')
 
-input_sms = st.text_input('Enter the Message ')
+input_sms = st.text_area('Enter the Message ')
 
 if st.button('Predict'):
     transformed_sms = transform_text(input_sms)
