@@ -44,7 +44,7 @@ def load_model_and_vectorizer():
     """
     try:
         tfidf = pickle.load(open('vectorizer.pkl', 'rb'))
-        model = pickle.load(open('model.pkl', 'rb'))
+        model = pickle.load(open('model .pkl', 'rb'))
         return tfidf, model
     except FileNotFoundError as e:
         st.error(f"File not found: {e}")
