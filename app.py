@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
 import string
+import pandas as pd
 from nltk.corpus import stopwords
 import nltk
 from nltk.stem.porter import PorterStemmer
@@ -43,7 +44,7 @@ def load_model_and_vectorizer():
     """
     try:
         tfidf = pickle.load(open('vectorizer.pkl', 'rb'))
-        model = pickle.load(open('model .pkl', 'rb'))
+        model = pickle.load(open('model.pkl', 'rb'))
         return tfidf, model
     except FileNotFoundError as e:
         st.error(f"File not found: {e}")
@@ -66,6 +67,24 @@ def predict_spam(tfidf, model, input_sms):
     except Exception as e:
         st.error(f"Error during prediction: {e}")
 
+def process_csv(file, tfidf, model):
+    """
+    Process the uploaded CSV file and predict spam for each message.
+    """
+    try:
+        df = pd.read_csv(file)
+        if 'message' not in df.columns:
+            st.error("CSV file must contain a column named 'message'")
+            return
+        
+        df['transformed_message'] = df['message'].apply(transform_text)
+        df['prediction'] = df['transformed_message'].apply(lambda x: model.predict(tfidf.transform([x]))[0])
+        df['prediction'] = df['prediction'].apply(lambda x: "Spam" if x == 1 else "Not Spam")
+        
+        st.write(df)
+    except Exception as e:
+        st.error(f"Error processing CSV file: {e}")
+
 def main():
     """
     Main function to run the Streamlit app.
@@ -74,6 +93,12 @@ def main():
 
     # Load the model and vectorizer
     tfidf, model = load_model_and_vectorizer()
+
+    # File uploader widget for CSV file
+    uploaded_file = st.file_uploader("Upload mail_data.csv", type=["csv"])
+
+    if uploaded_file:
+        process_csv(uploaded_file, tfidf, model)
 
     input_sms = st.text_area('Enter the Message')
 
